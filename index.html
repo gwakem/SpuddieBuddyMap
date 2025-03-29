@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkBuddies Visualization</title>
+    
+    <!-- Security Headers - CSP only (other headers should be set via HTTP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdnjs.cloudflare.com https://d3js.org 'unsafe-eval'; style-src 'self' https://unpkg.com https://cdnjs.cloudflare.com 'unsafe-inline'; img-src 'self' https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com https://unpkg.com data:; connect-src 'self';">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- CSS Files - Consolidated into one file -->
+    <link rel="stylesheet" href="css/Consolidated styles.css">
+    
+    <!-- External Libraries -->
+    <!-- Leaflet for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+    
+    <!-- HTML2Canvas for exports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+    
+    <!-- D3.js for visualizations -->
+    <script src="https://d3js.org/d3.v7.min.js" crossorigin="anonymous"></script>
+    
+    <!-- PapaParse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" crossorigin="anonymous"></script>
+    
+    <!-- DOMPurify for HTML sanitization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>WorkBuddies Community Visualization</h1>
+            <p>Explore our Spuddy community around the world</p>
+        </header>
+        
+        <!-- Main Content Area -->
+        <main>
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Spuddy Dashboard</h2>
+                </div>
+                
+                <div class="counter">
+                    <h3>Spuddy Counter</h3>
+                    <div id="total-count">0</div>
+                    <p>Spuddies worldwide</p>
+                </div>
+                
+                <div class="filters">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <label for="name-filter">Search by name:</label>
+                        <input type="text" id="name-filter" placeholder="Enter name...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="state-filter">Filter by state:</label>
+                        <select id="state-filter">
+                            <option value="all">All States</option>
+                            <!-- States will be populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="about">
+                    <h3>About WorkBuddies</h3>
+                    <p>WorkBuddies is a warm and inclusive community for neurodivergent individuals, especially those with ADHD and autism.</p>
+                </div>
+                
+                <div class="export">
+                    <h3>Export Options</h3>
+                    <button id="export-png" class="export-btn">Export as PNG</button>
+                </div>
+            </aside>
+            
+            <!-- Visualization Area -->
+            <section class="visualization">
+                <!-- Tabs Navigation -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="map">Map View</button>
+                    <button class="tab-btn" data-tab="states">State Distribution</button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Map Tab -->
+                    <div id="map-tab" class="tab-pane active">
+                        <div id="map-container"></div>
+                    </div>
+                    
+                    <!-- State Distribution Tab -->
+                    <div id="states-tab" class="tab-pane">
+                        <div id="state-viz-container"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer>
+            <p>&copy; 2025 WorkBuddies Community. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/stateViz.js"></script>
+    <script src="js/darkMode.js"></script>
+    <script src="js/dataLoader.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

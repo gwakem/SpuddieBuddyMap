@@ -1,0 +1,1273 @@
+/* 
+ * WorkBuddies Visualization - Main Stylesheet
+ * Consolidated from styles.css and darkMode.css
+ */
+
+/* ========== Variables ========== */
+:root {
+    /* Light Mode Colors */
+    --primary-orange: #FF8C00;
+    --primary-blue: #4682B4;
+    --light-bg: #f5f5f5;
+    --light-text: #333333;
+    --light-secondary: #666666;
+    --light-accent: #4682B4;
+    --light-accent-hover: #3a6d96;
+    --light-border: #dddddd;
+    --light-card: #ffffff;
+    --light-shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Dark Mode Colors */
+    --dark-bg: #1a1a1a;
+    --dark-text: #f5f5f7;
+    --dark-secondary: #b0b0b0;
+    --dark-accent: #61a0d0;
+    --dark-accent-hover: #7db6e2;
+    --dark-border: #444444;
+    --dark-card: #2a2a2a;
+    --dark-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Shared Properties */
+    --shadow: 0 2px 10px var(--light-shadow);
+    --transition: all 0.3s ease;
+    --radius: 8px;
+}
+
+/* ========== Reset & Base Styles ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--light-text);
+    background-color: var(--light-bg);
+    transition: var(--transition);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ========== Fixed UI Controls ========== */
+.fixed-ui-control {
+    position: fixed;
+    z-index: 850;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 2px 5px var(--light-shadow));
+    transition: var(--transition);
+}
+
+/* Dark Mode Toggle */
+#dark-mode-toggle-container {
+    top: 20px;
+    right: 20px;
+}
+
+#dark-mode-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-card);
+    border: 1px solid var(--light-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+#dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+#dark-mode-toggle svg {
+    transition: var(--transition);
+}
+
+/* Fixed Controls Container */
+#fixed-controls-container {
+    bottom: 20px;
+    right: 20px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#fixed-clear-filters {
+    padding: 8px 16px;
+    background-color: var(--light-card);
+    border: 1px solid var(--light-border);
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+#fixed-clear-filters:hover {
+    background-color: var(--light-accent);
+    color: white;
+    border-color: var(--light-accent);
+}
+
+/* Toast Messages */
+#toast-message {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--light-accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px var(--light-shadow);
+    z-index: 2000;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+#toast-message.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ========== Header Styles ========== */
+header {
+    background: linear-gradient(135deg, var(--primary-orange), var(--primary-blue));
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    z-index: 950;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+}
+
+/* Admin Link Styles */
+.admin-link-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.admin-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.admin-link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    z-index: 950;
+}
+
+/* Return Button */
+.return-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    z-index: 950;
+}
+
+.return-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Mode Toggle */
+.mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 950;
+}
+
+/* ========== Main Content Styles ========== */
+main {
+    display: flex;
+    flex: 1;
+    padding: 1rem;
+    gap: 1rem;
+    transition: var(--transition);
+}
+
+/* ========== Sidebar Styles ========== */
+.sidebar {
+    flex: 0 0 280px;
+    background-color: var(--light-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: var(--transition);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.counter {
+    background-color: var(--primary-orange);
+    color: white;
+    padding: 1rem;
+    border-radius: var(--radius);
+    text-align: center;
+}
+
+#total-count {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.filters {
+    transition: var(--transition);
+}
+
+.filter-group {
+    margin-bottom: 1rem;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--light-border);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: var(--light-accent);
+    outline: none;
+}
+
+.filter-group input::placeholder {
+    color: var(--light-secondary);
+}
+
+.about {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 1rem;
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.export {
+    transition: var(--transition);
+}
+
+.export-btn {
+    display: block;
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--light-card);
+    border: 1px solid var(--light-accent);
+    color: var(--light-accent);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.export-btn:hover {
+    background-color: var(--light-accent);
+    color: white;
+    border-color: var(--light-accent);
+}
+
+/* ========== Visualization Area Styles ========== */
+.visualization {
+    flex: 1;
+    background-color: var(--light-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+/* ========== Tabs Styles ========== */
+.tabs {
+    display: flex;
+    background-color: var(--light-accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 1rem;
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    text-align: center;
+}
+
+.tab-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tab-btn.active {
+    background-color: var(--light-card);
+    color: var(--light-accent);
+}
+
+/* ========== Tab Content Styles ========== */
+.tab-content {
+    flex: 1;
+    position: relative;
+    background-color: var(--light-bg);
+    transition: var(--transition);
+}
+
+.tab-pane {
+    display: none;
+    height: 100%;
+    padding: 1rem;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* ========== Map Styles ========== */
+#map-container {
+    height: 100%;
+    min-height: 500px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Map Legend Styles */
+.map-legend {
+    background-color: var(--light-card);
+    padding: 10px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 200px;
+    transition: var(--transition);
+}
+
+.map-legend h4 {
+    margin-bottom: 8px;
+    text-align: center;
+    color: var(--light-accent);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    background-color: var(--primary-orange);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.legend-count {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--light-border);
+}
+
+/* Custom Marker Styles for Map */
+.custom-marker-wrapper {
+    background: none !important;
+    border: none !important;
+}
+
+.custom-marker {
+    background-color: var(--primary-orange);
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: relative;
+    box-shadow: 0 0 5px var(--light-shadow);
+    transition: var(--transition);
+}
+
+.custom-marker::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 6px 0;
+    border-style: solid;
+    border-color: var(--primary-orange) transparent transparent;
+}
+
+/* Buddy Popup Styles */
+.buddy-popup {
+    font-size: 1rem;
+    padding: 5px;
+    background-color: var(--light-card);
+    color: var(--light-text);
+    border: 1px solid var(--light-border);
+    transition: var(--transition);
+}
+
+.buddy-popup .name {
+    font-weight: bold;
+    color: var(--primary-orange);
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.buddy-popup .location {
+    font-size: 14px;
+    color: var(--light-text);
+    margin-bottom: 10px;
+}
+
+.buddy-popup .actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.zoom-to-btn {
+    padding: 4px 8px;
+    background-color: var(--light-accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: var(--transition);
+}
+
+.zoom-to-btn:hover {
+    background-color: var(--primary-orange);
+}
+
+/* ========== Enhanced Word Cloud Styles ========== */
+#word-cloud-container {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    perspective: 1200px; /* Add perspective for better 3D effect */
+}
+
+#tag-cloud-inner, .tagcloud {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: transparent;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d !important; /* Ensure 3D transformations */
+}
+
+#tag-cloud-inner span, .tagcloud span {
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.2s ease;
+    transform-style: preserve-3d !important; /* Ensure 3D transformations */
+    backface-visibility: visible !important;
+    position: absolute;
+    /* Better text visibility with outline */
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+    paint-order: stroke;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+#tag-cloud-inner span:hover, .tagcloud span:hover {
+    transform: scale(1.2) !important;
+}
+
+/* Animation for selected tags */
+@keyframes pulse-glow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.8));
+    }
+    50% {
+        filter: drop-shadow(0 0 10px rgba(255, 140, 0, 0.9));
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.8));
+    }
+}
+
+/* Dark mode specific enhancements */
+.dark-mode #tag-cloud-inner span, .dark-mode .tagcloud span {
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8); /* Darker shadow for better visibility */
+}
+
+/* Rotation speed control for wordcloud */
+.rotation-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--light-bg);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.rotation-label {
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.rotation-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    width: 150px;
+    background: linear-gradient(to right, var(--primary-orange), var(--primary-orange));
+    border-radius: 10px;
+    outline: none;
+    margin: 0 1rem;
+    border: none;
+}
+
+.rotation-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: 2px solid var(--primary-orange);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    margin-top: -5px;
+}
+
+.rotation-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: 2px solid var(--primary-orange);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .rotation-controls {
+    background-color: var(--dark-bg);
+}
+
+.dark-mode .rotation-slider::-webkit-slider-thumb {
+    background: var(--dark-card);
+}
+
+.dark-mode .rotation-slider::-moz-range-thumb {
+    background: var(--dark-card);
+}
+
+/* No data message styling */
+#word-cloud-container .no-data {
+    color: var(--light-secondary);
+    text-align: center;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.dark-mode #word-cloud-container .no-data {
+    color: var(--dark-secondary);
+}
+
+/* Export state */
+#word-cloud-container.exporting {
+    background-color: var(--light-card);
+    border-radius: var(--radius);
+    padding: 15px;
+}
+
+.dark-mode #word-cloud-container.exporting {
+    background-color: var(--dark-card);
+}
+
+.controls {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius);
+}
+
+/* ========== State Visualization Styles ========== */
+#state-viz-container {
+    height: 500px;
+}
+
+.state-viz-svg {
+    background-color: var(--light-bg);
+    transition: var(--transition);
+}
+
+.state-viz-svg text {
+    fill: var(--light-text);
+}
+
+.state-viz-svg path,
+.state-viz-svg line {
+    stroke: var(--light-secondary);
+}
+
+/* ========== Network Visualization Styles ========== */
+#network-container {
+    height: 500px;
+    background-color: var(--light-bg);
+    transition: var(--transition);
+}
+
+/* ========== No Data Message ========== */
+.no-data-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.no-data-content {
+    background-color: var(--light-card);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    max-width: 300px;
+    border: 1px solid var(--light-border);
+    transition: var(--transition);
+}
+
+.no-data-content h3 {
+    color: var(--primary-orange);
+    margin-bottom: 10px;
+}
+
+.reset-btn {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: var(--light-accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.reset-btn:hover {
+    background-color: var(--primary-orange);
+}
+
+/* ========== Export Features ========== */
+/* Export Loading Indicator */
+.export-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.export-loading-content {
+    background-color: var(--light-card);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.export-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--light-accent);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Export state styles */
+.exporting {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+#map-container.exporting {
+    background-color: var(--light-card);
+    border: none;
+}
+
+.export-notification {
+    background-color: var(--light-card);
+    color: var(--light-text);
+    transition: var(--transition);
+}
+
+/* ========== Footer Styles ========== */
+footer {
+    background-color: var(--light-text);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    transition: var(--transition);
+}
+
+/* ========== D3 Specific Overrides ========== */
+.domain,
+.tick line {
+    stroke: var(--light-secondary);
+    transition: var(--transition);
+}
+
+.tick text {
+    fill: var(--light-secondary);
+    transition: var(--transition);
+}
+
+/* ========== Dark Mode Styles ========== */
+.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Header */
+.dark-mode header {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+}
+
+/* Sidebar */
+.dark-mode .sidebar {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+    box-shadow: 0 2px 10px var(--dark-shadow);
+}
+
+.dark-mode .sidebar-header,
+.dark-mode .counter,
+.dark-mode .filters,
+.dark-mode .about,
+.dark-mode .export {
+    border-color: var(--dark-border);
+}
+
+/* Form Elements */
+.dark-mode input,
+.dark-mode select,
+.dark-mode button {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.dark-mode input:focus,
+.dark-mode select:focus {
+    border-color: var(--dark-accent);
+}
+
+.dark-mode input::placeholder {
+    color: var(--dark-secondary);
+}
+
+/* Dark Mode UI Controls */
+.dark-mode #dark-mode-toggle {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+.dark-mode #fixed-clear-filters {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+.dark-mode #fixed-clear-filters:hover {
+    background-color: var(--dark-accent);
+    border-color: var(--dark-accent);
+}
+
+.dark-mode #toast-message {
+    background-color: var(--dark-accent);
+}
+
+/* Buttons */
+.dark-mode .tab-btn {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.dark-mode .tab-btn.active {
+    background-color: var(--dark-accent);
+    border-color: var(--dark-accent);
+}
+
+.dark-mode .export-btn {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.dark-mode .export-btn:hover {
+    background-color: var(--dark-accent);
+    border-color: var(--dark-accent);
+}
+
+/* Visualization Area */
+.dark-mode .visualization {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+    box-shadow: 0 2px 10px var(--dark-shadow);
+}
+
+.dark-mode .tab-content {
+    background-color: var(--dark-bg);
+}
+
+/* Map */
+.dark-mode .custom-marker {
+    box-shadow: 0 0 5px var(--dark-shadow);
+}
+
+.dark-mode .map-legend {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.dark-mode .buddy-popup {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+/* Word Cloud */
+.dark-mode #tag-cloud-inner {
+    background-color: transparent;
+}
+
+/* State Visualization */
+.dark-mode .state-viz-svg {
+    background-color: var(--dark-bg);
+}
+
+.dark-mode .state-viz-svg text {
+    fill: var(--dark-text);
+}
+
+.dark-mode .state-viz-svg path,
+.dark-mode .state-viz-svg line {
+    stroke: var(--dark-secondary);
+}
+
+/* Network Visualization */
+.dark-mode #network-container {
+    background-color: var(--dark-bg);
+}
+
+/* Footer */
+.dark-mode footer {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+}
+
+/* Export Notification */
+.dark-mode .export-notification {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+}
+
+/* No Data Messages */
+.dark-mode .no-data-message {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+.dark-mode .no-data-content {
+    border-color: var(--dark-border);
+}
+
+.dark-mode .reset-btn {
+    background-color: var(--dark-accent);
+    color: white;
+}
+
+/* D3 Specific Dark Mode Overrides */
+.dark-mode .domain,
+.dark-mode .tick line {
+    stroke: var(--dark-secondary);
+}
+
+.dark-mode .tick text {
+    fill: var(--dark-secondary);
+}
+
+/* Dark mode styles for admin components */
+body.dark-mode .admin-link {
+    background-color: rgba(97, 160, 208, 0.2);
+    border-color: rgba(97, 160, 208, 0.4);
+}
+
+body.dark-mode .admin-link:hover {
+    background-color: rgba(97, 160, 208, 0.3);
+}
+
+body.dark-mode .return-btn {
+    background-color: rgba(97, 160, 208, 0.2);
+    border-color: rgba(97, 160, 208, 0.4);
+}
+
+body.dark-mode .return-btn:hover {
+    background-color: rgba(97, 160, 208, 0.3);
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        flex: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    #dark-mode-toggle-container {
+        top: 60px;
+        right: 10px;
+    }
+    
+    #fixed-controls-container {
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    #dark-mode-toggle,
+    #fixed-clear-filters {
+        transform: scale(0.9);
+    }
+    
+    .admin-link-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+    }
+    
+    header {
+        padding-bottom: 1.5rem;
+        position: relative;
+    }
+    
+    .header-actions {
+        margin-top: 10px;
+    }
+}
+/* Dark Mode Text Readability Fixes */
+
+/* Ensure text is readable in dark mode for modals */
+.dark-mode .modal-content {
+    background-color: #333;
+    color: #f5f5f7;
+}
+
+/* Fix form input text in dark mode */
+.dark-mode input, 
+.dark-mode select, 
+.dark-mode textarea {
+    background-color: #444;
+    color: #f5f5f7;
+    border-color: #555;
+}
+
+.dark-mode input::placeholder {
+    color: #aaa;
+}
+
+/* Fix table text in dark mode */
+.dark-mode .data-table th {
+    background-color: #444;
+    color: #f5f5f7;
+}
+
+.dark-mode .data-table td {
+    color: #f5f5f7;
+}
+
+/* Fix panel text in dark mode */
+.dark-mode .admin-panel {
+    background-color: #333;
+    color: #f5f5f7;
+}
+
+.dark-mode .panel-header h2 {
+    color: #f5f5f7;
+}
+
+/* Fix button text in dark mode */
+.dark-mode .btn.btn-secondary {
+    color: #f5f5f7;
+    border-color: #555;
+}
+
+.dark-mode .btn-primary {
+    background-color: #61a0d0;
+}
+
+.dark-mode .btn-primary:hover {
+    background-color: #7db6e2;
+}
+
+/* Fix notification text in dark mode */
+.dark-mode .toast {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Fix auth modal text in dark mode */
+.dark-mode #auth-modal .auth-modal-content {
+    background-color: #333;
+    color: #f5f5f7;
+}
+
+.dark-mode #auth-modal label {
+    color: #f5f5f7;
+}
+
+/* Fix progress/status text in dark mode */
+.dark-mode .progress-container {
+    background-color: #444;
+}
+
+.dark-mode .processing-logs {
+    background-color: #333;
+    color: #f5f5f7;
+    border-color: #555;
+}
+
+/* Fix data preview text in dark mode */
+.dark-mode .data-preview {
+    background-color: #333;
+    color: #f5f5f7;
+    border-color: #555;
+}
+
+/* Fix admin panel text elements */
+.dark-mode #import-instructions {
+    color: #f5f5f7;
+}
+
+.dark-mode #import-instructions ul {
+    color: #f5f5f7;
+}
+
+/* Fix modal elements */
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+    border-color: #555;
+}
+
+.dark-mode .modal-close {
+    color: #f5f5f7;
+}
+
+/* Fix visualization text in dark mode */
+.dark-mode .visualization .tab-content {
+    color: #f5f5f7;
+}
+
+/* Fix for fieldset and legend */
+.dark-mode fieldset {
+    border-color: #555;
+}
+
+.dark-mode legend {
+    color: #f5f5f7;
+}
+
+/* Fix checkbox labels */
+.dark-mode .checkbox-group label {
+    color: #f5f5f7;
+}
+
+/* ========== Potato Marker Styles ========== */
+.potato-marker-wrapper {
+    background: none !important;
+    border: none !important;
+}
+
+.potato-marker {
+    position: relative;
+    width: 40px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.potato-emoji-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    animation: potato-bounce 2s ease-in-out infinite;
+    transform-origin: bottom center;
+    position: relative;
+    z-index: 10;
+}
+
+.potato-emoji {
+    font-size: 22px;
+    transform: translateY(-1px);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.potato-label {
+    margin-top: 5px;
+    padding: 3px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    max-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease;
+    transform: translateY(-3px);
+    z-index: 5;
+}
+
+.potato-marker:hover .potato-label {
+    transform: translateY(-3px) scale(1.1);
+    z-index: 20;
+}
+
+@keyframes potato-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* Legend Emoji */
+.legend-emoji {
+    font-size: 16px;
+}
+
+/* ========== Dark Mode Marker Fixes ========== */
+.dark-mode .potato-label {
+    background-color: rgba(42, 42, 42, 0.9) !important;
+    color: var(--dark-text) !important;
+    text-shadow: 0px 0px 2px #000 !important;
+}
+
+.dark-mode .legend-item span {
+    color: var(--dark-text);
+}
+
+/* Fix map popup text in dark mode */
+.dark-mode .leaflet-popup-content-wrapper {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+}
+
+.dark-mode .leaflet-popup-tip {
+    background-color: var(--dark-card);
+}
